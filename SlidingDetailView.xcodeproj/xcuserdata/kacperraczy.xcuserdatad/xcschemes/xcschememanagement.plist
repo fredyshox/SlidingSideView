@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>SlidingDetailViewDemo.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>E28040691F26839800201497</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E2B94BD41F240BD20060C9B9</key>
 		<dict>
 			<key>primary</key>
