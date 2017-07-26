@@ -9,17 +9,23 @@
 import UIKit
 import SlidingDetailView
 
-class ViewController: UIViewController {
+class DemoViewController: UIViewController {
 
     var slidingDetailView: SlidingDetailView!
-
+    var slidingDetailAnchor: SlidingDetailView.SlidingDetailViewAnchor!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if slidingDetailAnchor == nil {
+            slidingDetailAnchor = .bottom
+        }
         
-        slidingDetailView = SlidingDetailView(withNormalHeight: 150.0, expandedHeight: 300.0)
+        slidingDetailView = SlidingDetailView(slidingDetailAnchor ,withNormalHeight: 100.0, expandedHeight: 200.0)
         slidingDetailView.backgroundColor = UIColor.cyan
-        
         
         self.view.addSubview(slidingDetailView)
     }
