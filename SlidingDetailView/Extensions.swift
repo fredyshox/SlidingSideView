@@ -30,3 +30,22 @@ extension UIWindow {
         }
     }
 }
+
+
+extension UIView {
+    func snapshotImage() -> UIImage?{
+        UIGraphicsBeginImageContext(self.bounds.size)
+        self.drawHierarchy(in: self.bounds, afterScreenUpdates: false)
+        let snapshotImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return snapshotImage
+    }
+    
+    func snapshotView() -> UIView?{
+        if let image = snapshotImage() {
+            return UIImageView(image: image)
+        }else {
+            return nil
+        }
+    }
+}

@@ -10,8 +10,26 @@ import UIKit
 
 public class SlidingDetailView: UIView {
     
-    let normalHeight: CGFloat!
-    let expandedHeight: CGFloat!
+    //MARK: Enums
+    
+    public enum SlidingDetailViewState {
+        case normal
+        case expanded
+        case collapsed
+    }
+
+    public enum SlidingDetailViewAnchor {
+        case bottom
+        case top
+        case right
+        case left
+    }
+    
+    //MARK: Properties
+    
+    private var _normalHeight: CGFloat!
+    
+    private var _expandedHeight: CGFloat?
     
     private var _anchor: SlidingDetailViewAnchor! {
         didSet{
@@ -24,24 +42,25 @@ public class SlidingDetailView: UIView {
         }
     }
     
-    private var shouldInvertAnchorConstant: Bool = false
-    
     private var _currentSDVState: SlidingDetailViewState = .collapsed
     
-    let animationDuration: Double = 0.3
+    private var _animationDuration: Double = 0.3
     
+    private var shouldInvertAnchorConstant: Bool = false
     
-    //TODO slide direction enum
+    //MARK: Initialization
     
-    public init(_ anchor: SlidingDetailViewAnchor ,withNormalHeight normal: CGFloat, expandedHeight expanded: CGFloat?) {
+    public init(_ anchor: SlidingDetailViewAnchor, withNormalHeight normal: CGFloat, expandedHeight expanded: CGFloat?) {
         
-        self.normalHeight = normal
-        self.expandedHeight = expanded ?? normal
+        self._normalHeight = normal
+        self._expandedHeight = expanded
         self._anchor = anchor
         
         super.init(frame: CGRect.zero)
-        
-        translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    public convenience init(_ anchor: SlidingDetailViewAnchor, withNormalHeight normal: CGFloat) {
+        self.init(anchor, withNormalHeight: normal, expandedHeight: nil)
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -57,24 +76,45 @@ public class SlidingDetailView: UIView {
         configureConstraints(superView: v)
     }
     
+    //MARK: Getters and Setters
+    
+    public var normalHeight: CGFloat {
+        get{
+            return _normalHeight
+        }
+        set {
+            _normalHeight = newValue
+            setCurrentStateConstraints(state: _currentSDVState)
+        }
+    }
+    
+    public var expandedHeight: CGFloat? {
+        get{
+            return _expandedHeight
+        }
+        set{
+            _expandedHeight = newValue
+            setCurrentStateConstraints(state: _currentSDVState)
+        }
+    }
+    
     public var currentState: SlidingDetailViewState {
         get {
             return _currentSDVState
         }
         set{
             _currentSDVState = newValue
-            switch newValue {
-            case .normal:
-                sdv_sizeConstraint.constant = self.normalHeight
-                sdv_anchorConstraint.constant = 0.0
-            case .collapsed:
-                sdv_sizeConstraint.constant = self.normalHeight
-                sdv_anchorConstraint.constant = self.normalHeight * (shouldInvertAnchorConstant ? -1 : 1)
-            case .expanded:
-                sdv_sizeConstraint.constant = self.expandedHeight
-                sdv_anchorConstraint.constant = 0.0
-            }
+            setCurrentStateConstraints(state: newValue)
             animateChanges()
+        }
+    }
+    
+    public var slideDuration: Double {
+        get {
+            return _animationDuration
+        }
+        set{
+            _animationDuration = newValue
         }
     }
     
@@ -84,19 +124,7 @@ public class SlidingDetailView: UIView {
         }
     }
     
-    public enum SlidingDetailViewState {
-        case normal
-        case expanded
-        case collapsed
-    }
-    
-    //TODO
-    public enum SlidingDetailViewAnchor {
-        case bottom
-        case top
-        case right
-        case left
-    }
+    //MARK: Constraints
     
     private var sdv_sizeConstraint:NSLayoutConstraint!
     private var sdv_anchorConstraint:NSLayoutConstraint!
@@ -207,12 +235,30 @@ public class SlidingDetailView: UIView {
         }
     }
     
+    //MARK: Animation
     
     private func animateChanges() {
-        UIView.animate(withDuration: animationDuration) { 
+        UIView.animate(withDuration: _animationDuration) {
             self.superview?.layoutIfNeeded()
         }
     }
+    
+    private func setCurrentStateConstraints(state: SlidingDetailViewState) {
+        switch state {
+        case .normal:
+            sdv_sizeConstraint.constant = self._normalHeight
+            sdv_anchorConstraint.constant = 0.0
+        case .collapsed:
+            sdv_sizeConstraint.constant = self._normalHeight
+            sdv_anchorConstraint.constant = self._normalHeight * (shouldInvertAnchorConstant ? -1 : 1)
+        case .expanded:
+            sdv_sizeConstraint.constant = self._expandedHeight ?? self._normalHeight
+            sdv_anchorConstraint.constant = 0.0
+        }
+    }
+    
+    
+    //MARK: TODO
     
     //TODO animationDefaultOptions: springEffect, uiViewAnimateOptions, animationDuration
     //     setting view state: simple & advanced method(completionBlock?)
