@@ -248,8 +248,13 @@ public class SlidingDetailView: UIView {
     //MARK: Animation
     
     private func animateChanges() {
-        UIView.animate(withDuration: _animationDuration) {
+        self.isHidden = false
+        UIView.animate(withDuration: _animationDuration, delay: 0.0, options: [], animations: { 
             self.superview?.layoutIfNeeded()
+        }) { (_) in
+            if self._currentSDVState == .collapsed {
+                self.isHidden = true
+            }
         }
     }
     
