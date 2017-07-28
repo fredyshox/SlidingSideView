@@ -45,13 +45,17 @@ public class SlidingDetailView: UIView {
     
     public var topLayouyGuide: UILayoutSupport? {
         didSet{
-            
+            if superview != nil {
+                configureConstraints(superView: superview!)
+            }
         }
     }
     
     public var bottomLayoutGuide: UILayoutSupport? {
         didSet{
-            
+            if superview != nil {
+                configureConstraints(superView: superview!)
+            }
         }
     }
     
@@ -152,18 +156,27 @@ public class SlidingDetailView: UIView {
     
     private var sdv_sizeConstraint:NSLayoutConstraint!
     private var sdv_anchorConstraint:NSLayoutConstraint!
+    private var sdv_supportConstraints: [NSLayoutConstraint]!
     
     private func configureConstraints(superView: UIView) {
-        self.removeConstraints(self.constraints)
+        if sdv_supportConstraints != nil && !sdv_supportConstraints.isEmpty{
+            NSLayoutConstraint.deactivate(sdv_supportConstraints)
+            self.removeConstraints(sdv_supportConstraints)
+        }
+        
+        if sdv_anchorConstraint != nil {
+            NSLayoutConstraint.deactivate([sdv_anchorConstraint])
+            self.removeConstraint(sdv_anchorConstraint)
+        }
+        
         self.translatesAutoresizingMaskIntoConstraints = false
         
         sdv_sizeConstraint = createSizeConstraint()
         sdv_anchorConstraint = createAnchorConstraint(superView: superView)
-        let supportConstraints = createSupportConstraints(superView: superView)
+        sdv_supportConstraints = createSupportConstraints(superView: superView)
         
-        //TODO: memories this constraints for later operation
         NSLayoutConstraint.activate([sdv_anchorConstraint, sdv_sizeConstraint])
-        NSLayoutConstraint.activate(supportConstraints)
+        NSLayoutConstraint.activate(sdv_supportConstraints)
         
         _currentSDVState = .collapsed
         
@@ -182,22 +195,23 @@ public class SlidingDetailView: UIView {
     
     private func createAnchorConstraint(superView: UIView) -> NSLayoutConstraint {
         var anchorConstraint: NSLayoutConstraint!
-        if anchor != .left && anchor != .right {
-            var layoutGuide: Any?
-            if anchor == .top {
-                layoutGuide = topLayouyGuide ?? superView
-                anchorConstraint = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: layoutGuide!, attribute: .bottom, multiplier: 1.0, constant: 0.0)
-            } else if anchor == .bottom {
-                layoutGuide = bottomLayoutGuide ?? superView
-                anchorConstraint = NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: layoutGuide!, attribute: .top, multiplier: 1.0, constant: 0.0)
+        switch anchor {
+        case .bottom:
+            if bottomLayoutGuide != nil {
+                anchorConstraint = NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: bottomLayoutGuide!, attribute: .top, multiplier: 1.0, constant: 0.0)
+            }else {
+                anchorConstraint = NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: superView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
             }
-            
-
-        }else {
+        case .top:
+            if topLayouyGuide != nil {
+                anchorConstraint = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: topLayouyGuide!, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+            }else {
+                anchorConstraint = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: superView, attribute: .top, multiplier: 1.0, constant: 0.0)
+            }
+        case .left, .right:
             let assiociatedAttr = getAssiociatedLayoutAttribute(anchor: anchor)
             anchorConstraint = NSLayoutConstraint(item: self, attribute: assiociatedAttr, relatedBy: .equal, toItem: superView, attribute: assiociatedAttr, multiplier: 1.0, constant: 0.0)
         }
-        
         return anchorConstraint
     }
     
@@ -283,7 +297,6 @@ public class SlidingDetailView: UIView {
     //TODO setting view state: simple & advanced method(completionBlock?)
     //TODO gestureRecognizers: panGR, springEffectOnMaximumHeight
     //TODO delegate protocol and methods
-    //TODO do not rely on visible vc(get reference to parent vc in init?)!!
 
 }
 

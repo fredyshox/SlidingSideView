@@ -16,21 +16,22 @@ class DemoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
         if slidingDetailAnchor == nil {
             slidingDetailAnchor = .bottom
         }
         
         slidingDetailView = SlidingDetailView(slidingDetailAnchor ,withNormalHeight: 100.0, expandedHeight: 200.0)
         slidingDetailView.backgroundColor = UIColor.cyan
+        
+        //layoutGuides should be set before adding view as a subview
         slidingDetailView.topLayouyGuide = self.topLayoutGuide
         slidingDetailView.bottomLayoutGuide = self.bottomLayoutGuide
+
         
         self.view.addSubview(slidingDetailView)
+    
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
