@@ -6,7 +6,7 @@
 //  Copyright © 2017 Kacper Raczy. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
 extension UIWindow {

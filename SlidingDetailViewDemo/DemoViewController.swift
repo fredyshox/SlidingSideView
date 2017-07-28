@@ -26,6 +26,8 @@ class DemoViewController: UIViewController {
         
         slidingDetailView = SlidingDetailView(slidingDetailAnchor ,withNormalHeight: 100.0, expandedHeight: 200.0)
         slidingDetailView.backgroundColor = UIColor.cyan
+        slidingDetailView.topLayouyGuide = self.topLayoutGuide
+        slidingDetailView.bottomLayoutGuide = self.bottomLayoutGuide
         
         self.view.addSubview(slidingDetailView)
     }

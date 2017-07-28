@@ -31,22 +31,30 @@ public class SlidingDetailView: UIView {
     
     private var _expandedHeight: CGFloat?
     
-    private var _anchor: SlidingDetailViewAnchor! {
-        didSet{
-            switch _anchor! {
-            case .top, .left:
-                shouldInvertAnchorConstant = true
-            case .bottom, .right :
-                shouldInvertAnchorConstant = false
-            }
-        }
-    }
+    private var _anchor: SlidingDetailViewAnchor!
     
     private var _currentSDVState: SlidingDetailViewState = .collapsed
     
     private var _animationDuration: Double = 0.3
     
-    private var shouldInvertAnchorConstant: Bool = false
+    
+    //is overwritten
+    private var shouldInvertAnchorConstant: Bool
+    
+    //layout guides
+    
+    public var topLayouyGuide: UILayoutSupport? {
+        didSet{
+            
+        }
+    }
+    
+    public var bottomLayoutGuide: UILayoutSupport? {
+        didSet{
+            
+        }
+    }
+    
     
     //MARK: Initialization
     
@@ -55,6 +63,13 @@ public class SlidingDetailView: UIView {
         self._normalHeight = normal
         self._expandedHeight = expanded
         self._anchor = anchor
+        
+        switch anchor {
+        case .top, .left:
+            shouldInvertAnchorConstant = true
+        case .bottom, .right :
+            shouldInvertAnchorConstant = false
+        }
         
         super.init(frame: CGRect.zero)
     }
@@ -74,6 +89,15 @@ public class SlidingDetailView: UIView {
         }
         
         configureConstraints(superView: v)
+    }
+    
+    private func checkAnchorInvertionStatus(forAnchor anchor: SlidingDetailViewAnchor) -> Bool {
+        switch anchor {
+        case .top, .left:
+            return true
+        case .bottom, .right :
+            return false
+        }
     }
     
     //MARK: Getters and Setters
@@ -161,10 +185,10 @@ public class SlidingDetailView: UIView {
         if anchor != .left && anchor != .right {
             var layoutGuide: Any?
             if anchor == .top {
-                layoutGuide = getLayoutGuide(.top) ?? superView
+                layoutGuide = topLayouyGuide ?? superView
                 anchorConstraint = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: layoutGuide!, attribute: .bottom, multiplier: 1.0, constant: 0.0)
             } else if anchor == .bottom {
-                layoutGuide = getLayoutGuide(.bottom) ?? superView
+                layoutGuide = bottomLayoutGuide ?? superView
                 anchorConstraint = NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: layoutGuide!, attribute: .top, multiplier: 1.0, constant: 0.0)
             }
             
@@ -186,8 +210,8 @@ public class SlidingDetailView: UIView {
             let right = NSLayoutConstraint(item: self, attribute: .right, relatedBy: .equal, toItem: superView, attribute: .right, multiplier: 1.0, constant: 0.0)
             supportConstraints.append(contentsOf: [left,right])
         case .left, .right:
-            let topAnchorObject: Any? = getLayoutGuide(.top)
-            let bottomAnchorObject: Any? = getLayoutGuide(.bottom)
+            let topAnchorObject: Any? = topLayouyGuide
+            let bottomAnchorObject: Any? = bottomLayoutGuide
             
             var top: NSLayoutConstraint!
             var bottom: NSLayoutConstraint!
@@ -206,20 +230,6 @@ public class SlidingDetailView: UIView {
         }
         
         return supportConstraints
-    }
-    
-    
-    func getLayoutGuide(_ anchor: SlidingDetailViewAnchor) -> UILayoutSupport? {
-        var layoutGuide: UILayoutSupport?
-        if let currentVC = UIApplication.shared.windows.first?.visibleViewController {
-            if anchor == .top{
-                layoutGuide = currentVC.topLayoutGuide
-            }else if anchor == .bottom{
-                layoutGuide = currentVC.bottomLayoutGuide
-            }
-        }
-        
-        return layoutGuide
     }
     
     private func getAssiociatedLayoutAttribute(anchor: SlidingDetailViewAnchor) -> NSLayoutAttribute {
@@ -250,7 +260,11 @@ public class SlidingDetailView: UIView {
             sdv_anchorConstraint.constant = 0.0
         case .collapsed:
             sdv_sizeConstraint.constant = self._normalHeight
-            sdv_anchorConstraint.constant = self._normalHeight * (shouldInvertAnchorConstant ? -1 : 1)
+            if shouldInvertAnchorConstant {
+                sdv_anchorConstraint.constant = self._normalHeight * (-1)
+            }else {
+                sdv_anchorConstraint.constant = self._normalHeight
+            }
         case .expanded:
             sdv_sizeConstraint.constant = self._expandedHeight ?? self._normalHeight
             sdv_anchorConstraint.constant = 0.0
@@ -261,9 +275,10 @@ public class SlidingDetailView: UIView {
     //MARK: TODO
     
     //TODO animationDefaultOptions: springEffect, uiViewAnimateOptions, animationDuration
-    //     setting view state: simple & advanced method(completionBlock?)
-    //     gestureRecognizers: panGR, springEffectOnMaximumHeight
-    //TODO do not rely on visible vc(get reference to parent vc in init?)
+    //TODO setting view state: simple & advanced method(completionBlock?)
+    //TODO gestureRecognizers: panGR, springEffectOnMaximumHeight
+    //TODO delegate protocol and methods
+    //TODO do not rely on visible vc(get reference to parent vc in init?)!!
 
 }
 
