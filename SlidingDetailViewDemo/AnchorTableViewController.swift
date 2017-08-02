@@ -10,7 +10,7 @@ import UIKit
 
 class AnchorTableViewController: UITableViewController {
     
-    var anchorDict: [String: SlidingDetailView.SlidingDetailViewAnchor] = [
+    var anchorDict: [String: SlidingDetailViewAnchor] = [
         "bottom": .bottom,
         "top": .top,
         "left": .left,
