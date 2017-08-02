@@ -189,6 +189,7 @@ public class SlidingDetailView: UIView {
         NSLayoutConstraint.activate(sdv_supportConstraints)
         
         _currentSDVState = .collapsed
+        setCurrentStateConstraints(state: _currentSDVState)
         
     }
     
