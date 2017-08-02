@@ -8,22 +8,22 @@
 
 import UIKit
 
-public class SlidingDetailView: UIView {
-    
-    //MARK: Enums
-    
-    public enum SlidingDetailViewState {
-        case normal
-        case expanded
-        case collapsed
-    }
+//MARK: Enums
 
-    public enum SlidingDetailViewAnchor {
-        case bottom
-        case top
-        case right
-        case left
-    }
+public enum SlidingDetailViewState {
+    case normal
+    case expanded
+    case collapsed
+}
+
+public enum SlidingDetailViewAnchor {
+    case bottom
+    case top
+    case right
+    case left
+}
+
+public class SlidingDetailView: UIView {
     
     //MARK: Properties
     
@@ -36,7 +36,8 @@ public class SlidingDetailView: UIView {
     private var _currentSDVState: SlidingDetailViewState = .collapsed
     
     private var _animationDuration: Double = 0.3
-    
+
+    private var _delegate: SlidingDetailViewDelegate?
     
     //is overwritten
     private var shouldInvertAnchorConstant: Bool
@@ -152,6 +153,15 @@ public class SlidingDetailView: UIView {
         }
     }
     
+    public var delegate: SlidingDetailViewDelegate? {
+        get{
+            return _delegate
+        }
+        set{
+            _delegate = newValue
+        }
+    }
+    
     //MARK: Constraints
     
     private var sdv_sizeConstraint:NSLayoutConstraint!
@@ -262,6 +272,7 @@ public class SlidingDetailView: UIView {
     //MARK: Animation
     
     private func animateChanges() {
+        delegate?.slidingDetailView(self, willSlideToState: _currentSDVState)
         self.isHidden = false
         UIView.animate(withDuration: _animationDuration, delay: 0.0, options: [], animations: { 
             self.superview?.layoutIfNeeded()
@@ -269,6 +280,7 @@ public class SlidingDetailView: UIView {
             if self._currentSDVState == .collapsed {
                 self.isHidden = true
             }
+            self.delegate?.slidingDetailView(self, didSlideToState: self._currentSDVState)
         }
     }
     
@@ -289,14 +301,5 @@ public class SlidingDetailView: UIView {
             sdv_anchorConstraint.constant = 0.0
         }
     }
-    
-    
-    //MARK: TODO
-    
-    //TODO animationDefaultOptions: springEffect, uiViewAnimateOptions, animationDuration
-    //TODO setting view state: simple & advanced method(completionBlock?)
-    //TODO gestureRecognizers: panGR, springEffectOnMaximumHeight
-    //TODO delegate protocol and methods
 
 }
-

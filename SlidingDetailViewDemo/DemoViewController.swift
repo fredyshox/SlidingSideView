@@ -12,7 +12,7 @@ import SlidingDetailView
 class DemoViewController: UIViewController {
 
     var slidingDetailView: SlidingDetailView!
-    var slidingDetailAnchor: SlidingDetailView.SlidingDetailViewAnchor!
+    var slidingDetailAnchor: SlidingDetailViewAnchor!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class DemoViewController: UIViewController {
         
         slidingDetailView = SlidingDetailView(slidingDetailAnchor ,withNormalHeight: 100.0, expandedHeight: 200.0)
         slidingDetailView.backgroundColor = UIColor.cyan
-        
+        slidingDetailView.delegate = self
         //layoutGuides should be set before adding view as a subview
         slidingDetailView.topLayouyGuide = self.topLayoutGuide
         slidingDetailView.bottomLayoutGuide = self.bottomLayoutGuide
@@ -51,10 +51,9 @@ class DemoViewController: UIViewController {
     }
 }
 
-//extension ViewController: UIViewControllerTransitioningDelegate {
-//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        let animator = SlidingDetailAnimationController(originFrame: slidingDetailView.frame)
-//        animator.view = slidingDetailView
-//        return animator
-//    }
-//}
+extension DemoViewController: SlidingDetailViewDelegate {
+    
+    public func slidingDetailView(_ sdView: SlidingDetailView, willSlideToState state: SlidingDetailViewState) {
+        print("will slide")
+    }
+}
