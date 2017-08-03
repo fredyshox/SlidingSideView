@@ -23,6 +23,7 @@
 		E28040911F2BE9A900201497 /* SlidingDetailViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28040901F2BE9A900201497 /* SlidingDetailViewDelegate.swift */; };
 		E28040931F2BEBDE00201497 /* TODO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28040921F2BEBDE00201497 /* TODO.swift */; };
 		E28040941F3282A500201497 /* SlidingDetailViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28040901F2BE9A900201497 /* SlidingDetailViewDelegate.swift */; };
+		E2B002341F33E362002FB6F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2B002331F33E362002FB6F5 /* UIKit.framework */; };
 		E2B94BE61F240BD20060C9B9 /* SlidingSideView.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B94BD81F240BD20060C9B9 /* SlidingSideView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		E280408E1F29509300201497 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Extensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E28040901F2BE9A900201497 /* SlidingDetailViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingDetailViewDelegate.swift; sourceTree = "<group>"; };
 		E28040921F2BEBDE00201497 /* TODO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TODO.swift; sourceTree = "<group>"; };
+		E2B002331F33E362002FB6F5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E2B94BD51F240BD20060C9B9 /* SlidingSideView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SlidingSideView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2B94BD81F240BD20060C9B9 /* SlidingSideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidingSideView.h; sourceTree = "<group>"; };
 		E2B94BD91F240BD20060C9B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2B002341F33E362002FB6F5 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +131,14 @@
 			path = SlidingSideViewDemo;
 			sourceTree = "<group>";
 		};
+		E2B002321F33E361002FB6F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E2B002331F33E362002FB6F5 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E2B94BCB1F240BD10060C9B9 = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +146,7 @@
 				E280406B1F26839800201497 /* SlidingSideViewDemo */,
 				E24269AA1F3393C90072ED5C /* SlidingSideViewTests */,
 				E2B94BD61F240BD20060C9B9 /* Products */,
+				E2B002321F33E361002FB6F5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -580,6 +592,7 @@
 				E24269B31F3393C90072ED5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E280407B1F26839800201497 /* Build configuration list for PBXNativeTarget "SlidingSideViewDemo" */ = {
 			isa = XCConfigurationList;
