@@ -10,11 +10,17 @@ import UIKit
 
 class AnchorTableViewController: UITableViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.title = "Choose side"
+    }
+    
     var anchorDict: [String: SlidingDetailViewAnchor] = [
-        "bottom": .bottom,
-        "top": .top,
-        "left": .left,
-        "right":.right
+        "Bottom": .bottom,
+        "Top": .top,
+        "Left": .left,
+        "Right":.right
     ]
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,6 +47,7 @@ class AnchorTableViewController: UITableViewController {
                 if let vc = segue.destination as? DemoViewController {
                     if let index = sender as? Int {
                         vc.slidingDetailAnchor = Array(anchorDict.values)[index]
+                        vc.title = Array(anchorDict.keys)[index]
                     }
                 }
             default:

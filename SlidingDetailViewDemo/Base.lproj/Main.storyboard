@@ -4,8 +4,9 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -52,8 +53,70 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nhG-JF-yqH">
+                                <rect key="frame" x="146.5" y="94" width="81" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="nhG-JF-yqH" secondAttribute="height" multiplier="162:300" id="Vjc-q3-IG4"/>
+                                    <constraint firstAttribute="height" constant="150" id="dn2-ah-gZr"/>
+                                </constraints>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q0g-8z-FBY">
+                                <rect key="frame" x="16" y="256" width="343" height="359"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Pushing the buttons in the toolbar, changes ">
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="HelveticaNeue"/>
+                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="currentState">
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="HelveticaNeue-Medium"/>
+                                            <font key="NSOriginalFont" size="15" name="HelveticaNeue-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" of the ">
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="HelveticaNeue"/>
+                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="SlidingSideView">
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="HelveticaNeue-Medium"/>
+                                            <font key="NSOriginalFont" size="15" name="HelveticaNeue-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" object, which sets corresponding height and animate sliding effect.">
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="HelveticaNeue"/>
+                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="q0g-8z-FBY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="9bN-U3-tW5"/>
+                            <constraint firstItem="nhG-JF-yqH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MAC-0x-vJN"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="q0g-8z-FBY" secondAttribute="bottom" constant="8" id="TFP-bR-9sC"/>
+                            <constraint firstItem="q0g-8z-FBY" firstAttribute="top" secondItem="nhG-JF-yqH" secondAttribute="bottom" constant="12" id="cIi-Ae-YhX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="q0g-8z-FBY" secondAttribute="trailing" id="cUK-bF-mz3"/>
+                            <constraint firstItem="nhG-JF-yqH" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="uTO-52-Aae"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="slideImageView" destination="nhG-JF-yqH" id="wGF-gz-TYf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

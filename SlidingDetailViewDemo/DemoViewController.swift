@@ -13,7 +13,9 @@ class DemoViewController: UIViewController {
 
     var slidingDetailView: SlidingDetailView!
     var slidingDetailAnchor: SlidingDetailViewAnchor!
-    var vc: UIViewController!
+    var label: UILabel!
+    
+    @IBOutlet weak var slideImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,51 +24,76 @@ class DemoViewController: UIViewController {
         }
         
         setupToolbar()
+        setupSlideImage()
         
         slidingDetailView = SlidingDetailView(slidingDetailAnchor ,withNormalHeight: 100.0, expandedHeight: 200.0)
-        slidingDetailView.backgroundColor = UIColor.cyan
+        slidingDetailView.backgroundColor = UIColor.clear
         slidingDetailView.delegate = self
         
+        //set layoutguides before adding as a subview
         slidingDetailView.topLayouyGuide = self.topLayoutGuide
         slidingDetailView.bottomLayoutGuide = self.bottomLayoutGuide
         
-        
-        
-//        vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
-//        //addChildViewController(vc)
-//        //vc.loadView()
-//        vc.view.translatesAutoresizingMaskIntoConstraints = false
-//        let v = vc.view
-//        slidingDetailView.addSubview(v!)
-//        let top = NSLayoutConstraint(item: v, attribute: .top, relatedBy: .equal, toItem: slidingDetailView, attribute: .top, multiplier: 1.0, constant: 0.0)
-//        let bottom = NSLayoutConstraint(item: v, attribute: .bottom, relatedBy: .equal, toItem: slidingDetailView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
-//        let leading = NSLayoutConstraint(item: v, attribute: .leading, relatedBy: .equal, toItem: slidingDetailView, attribute: .leading, multiplier: 1.0, constant: 0.0)
-//        let trailing = NSLayoutConstraint(item: v, attribute: .trailing, relatedBy: .equal, toItem: slidingDetailView, attribute: .trailing, multiplier: 1.0, constant: 0.0)
-//        NSLayoutConstraint.activate([top,bottom,leading,trailing])
-        //vc.didMove(toParentViewController: self)
-        
-        
-
-        
         self.view.addSubview(slidingDetailView)
+        
+        let contentView = UIView()
+        contentView.backgroundColor = UIColor(red: 0.0, green: 129.0/255.0, blue: 213.0/255.0, alpha: 1.0)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        label = UILabel()
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 17.0)
+        label.textColor = UIColor.white
+        
+        contentView.addSubview(label)
+        let labelCenter = label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0.0)
+        let labelLeading = label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0.0)
+        let labelTrailing = label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0.0)
+        NSLayoutConstraint.activate([labelCenter,labelLeading,labelTrailing])
+        
+        slidingDetailView.addSubview(contentView)
+        configureViewLayout(view: contentView)
     
     }
     
     func normalSlide(_ sender: Any) {
         slidingDetailView.currentState = .normal
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        label.text = String(format: "State: Normal, Height: %g", slidingDetailView.normalHeight)
     }
 
     func extendedSlide(_ sender: Any) {
         slidingDetailView.currentState = .expanded
+        label.text = String(format: "State: Expanded, Height: %g", slidingDetailView.expandedHeight!)
     }
     
     func close(_ sender: Any) {
         slidingDetailView.currentState = .collapsed
+        label.text = "State: Collapsed"
+    }
+    
+    func configureViewLayout(view: UIView) {
+        let top = view.topAnchor.constraint(equalTo: self.slidingDetailView.topAnchor, constant: 0.0)
+        let bottom = view.bottomAnchor.constraint(equalTo: self.slidingDetailView.bottomAnchor, constant: 0.0)
+        let leading = view.leadingAnchor.constraint(equalTo: self.slidingDetailView.leadingAnchor, constant: 0.0)
+        let trailing = view.trailingAnchor.constraint(equalTo: self.slidingDetailView.trailingAnchor, constant: 0.0)
+        NSLayoutConstraint.activate([top,bottom,leading,trailing])
+    }
+    
+    func setupSlideImage() {
+        var image: UIImage!
+        switch slidingDetailAnchor! {
+        case .top:
+            image = UIImage(named: "top.png")
+        case .bottom:
+            image = UIImage(named: "bottom.png")
+        case .left:
+            image = UIImage(named: "left.png")
+        case .right:
+            image = UIImage(named: "right.png")
+        }
+        self.slideImageView.image = image
     }
     
     func setupToolbar() {
@@ -82,6 +109,10 @@ class DemoViewController: UIViewController {
 extension DemoViewController: SlidingDetailViewDelegate {
     
     public func slidingDetailView(_ sdView: SlidingDetailView, willSlideToState state: SlidingDetailViewState) {
-        print("will slide")
+        print("Will slide")
+    }
+    
+    func slidingDetailView(_ sdView: SlidingDetailView, didSlideToState state: SlidingDetailViewState) {
+        print("Did slide")
     }
 }
