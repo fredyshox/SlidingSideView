@@ -21,24 +21,28 @@ class DemoViewController: UIViewController {
             slidingDetailAnchor = .bottom
         }
         
+        setupToolbar()
+        
         slidingDetailView = SlidingDetailView(slidingDetailAnchor ,withNormalHeight: 100.0, expandedHeight: 200.0)
         slidingDetailView.backgroundColor = UIColor.cyan
         slidingDetailView.delegate = self
-        //layoutGuides should be set before adding view as a subview
+        
         slidingDetailView.topLayouyGuide = self.topLayoutGuide
         slidingDetailView.bottomLayoutGuide = self.bottomLayoutGuide
         
-        vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
-        //addChildViewController(vc)
-        //vc.loadView()
-        vc.view.translatesAutoresizingMaskIntoConstraints = false
-        let v = vc.view
-        slidingDetailView.addSubview(v!)
-        let top = NSLayoutConstraint(item: v, attribute: .top, relatedBy: .equal, toItem: slidingDetailView, attribute: .top, multiplier: 1.0, constant: 0.0)
-        let bottom = NSLayoutConstraint(item: v, attribute: .bottom, relatedBy: .equal, toItem: slidingDetailView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
-        let leading = NSLayoutConstraint(item: v, attribute: .leading, relatedBy: .equal, toItem: slidingDetailView, attribute: .leading, multiplier: 1.0, constant: 0.0)
-        let trailing = NSLayoutConstraint(item: v, attribute: .trailing, relatedBy: .equal, toItem: slidingDetailView, attribute: .trailing, multiplier: 1.0, constant: 0.0)
-        NSLayoutConstraint.activate([top,bottom,leading,trailing])
+        
+        
+//        vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
+//        //addChildViewController(vc)
+//        //vc.loadView()
+//        vc.view.translatesAutoresizingMaskIntoConstraints = false
+//        let v = vc.view
+//        slidingDetailView.addSubview(v!)
+//        let top = NSLayoutConstraint(item: v, attribute: .top, relatedBy: .equal, toItem: slidingDetailView, attribute: .top, multiplier: 1.0, constant: 0.0)
+//        let bottom = NSLayoutConstraint(item: v, attribute: .bottom, relatedBy: .equal, toItem: slidingDetailView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+//        let leading = NSLayoutConstraint(item: v, attribute: .leading, relatedBy: .equal, toItem: slidingDetailView, attribute: .leading, multiplier: 1.0, constant: 0.0)
+//        let trailing = NSLayoutConstraint(item: v, attribute: .trailing, relatedBy: .equal, toItem: slidingDetailView, attribute: .trailing, multiplier: 1.0, constant: 0.0)
+//        NSLayoutConstraint.activate([top,bottom,leading,trailing])
         //vc.didMove(toParentViewController: self)
         
         
@@ -48,25 +52,30 @@ class DemoViewController: UIViewController {
     
     }
     
+    func normalSlide(_ sender: Any) {
+        slidingDetailView.currentState = .normal
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    @IBAction func present(_ sender: UIButton) {
-        present(vc, animated: true, completion: nil)
-    }
 
-    @IBAction func normalSlide(_ sender: UIButton) {
-        slidingDetailView.currentState = .normal
-    }
-
-    @IBAction func extendedSlide(_ sender: UIButton) {
+    func extendedSlide(_ sender: Any) {
         slidingDetailView.currentState = .expanded
     }
     
-    @IBAction func close(_ sender: UIButton) {
+    func close(_ sender: Any) {
         slidingDetailView.currentState = .collapsed
+    }
+    
+    func setupToolbar() {
+        let normalBtn = UIBarButtonItem(title: "Normal", style: .plain, target: self, action: #selector(normalSlide(_:)))
+        let extendedBtn = UIBarButtonItem(title: "Extended", style: .plain, target: self, action: #selector(extendedSlide(_:)))
+        let closeBtn = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(close(_:)))
+        closeBtn.tintColor = UIColor.red
+        
+        self.toolbarItems = [normalBtn, extendedBtn, closeBtn]
     }
 }
 

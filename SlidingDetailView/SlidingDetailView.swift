@@ -190,6 +190,7 @@ public class SlidingDetailView: UIView {
         
         _currentSDVState = .collapsed
         setCurrentStateConstraints(state: _currentSDVState)
+        self.isHidden = true
         
     }
     
