@@ -1,15 +1,14 @@
 //
-//  SlidingDetailViewTests.swift
-//  SlidingDetailViewTests
+//  SlidingSideViewTests.swift
+//  SlidingSideViewTests
 //
-//  Created by Kacper Raczy on 23.07.2017.
+//  Created by Kacper Raczy on 03.08.2017.
 //  Copyright © 2017 Kacper Raczy. All rights reserved.
 //
 
 import XCTest
-@testable import SlidingDetailView
 
-class SlidingDetailViewTests: XCTestCase {
+class SlidingSideViewTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

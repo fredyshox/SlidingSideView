@@ -1,6 +1,6 @@
 //
 //  Extensions.swift
-//  SlidingDetailView
+//  SlidingSideView
 //
 //  Created by Kacper Raczy on 27.07.2017.
 //  Copyright © 2017 Kacper Raczy. All rights reserved.

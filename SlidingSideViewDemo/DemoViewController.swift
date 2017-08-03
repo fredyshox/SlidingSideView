@@ -1,18 +1,18 @@
 //
 //  ViewController.swift
-//  SlidingDetailViewDemo
+//  SlidingSideViewDemo
 //
 //  Created by Kacper Raczy on 24.07.2017.
 //  Copyright © 2017 Kacper Raczy. All rights reserved.
 //
 
 import UIKit
-import SlidingDetailView
+import SlidingSideView
 
 class DemoViewController: UIViewController {
 
-    var slidingDetailView: SlidingDetailView!
-    var slidingDetailAnchor: SlidingDetailViewAnchor!
+    var slidingDetailView: SlidingSideView!
+    var slidingDetailAnchor: SlidingSideViewAnchor!
     var label: UILabel!
     
     @IBOutlet weak var slideImageView: UIImageView!
@@ -26,7 +26,7 @@ class DemoViewController: UIViewController {
         setupToolbar()
         setupSlideImage()
         
-        slidingDetailView = SlidingDetailView(slidingDetailAnchor ,withNormalHeight: 100.0, expandedHeight: 200.0)
+        slidingDetailView = SlidingSideView(slidingDetailAnchor ,withNormalHeight: 100.0, expandedHeight: 200.0)
         slidingDetailView.backgroundColor = UIColor.clear
         slidingDetailView.delegate = self
         
@@ -106,13 +106,13 @@ class DemoViewController: UIViewController {
     }
 }
 
-extension DemoViewController: SlidingDetailViewDelegate {
+extension DemoViewController: SlidingSideViewDelegate {
     
-    public func slidingDetailView(_ sdView: SlidingDetailView, willSlideToState state: SlidingDetailViewState) {
+    public func slidingDetailView(_ sdView: SlidingSideView, willSlideToState state: SlidingSideViewState) {
         print("Will slide")
     }
     
-    func slidingDetailView(_ sdView: SlidingDetailView, didSlideToState state: SlidingDetailViewState) {
+    func slidingDetailView(_ sdView: SlidingSideView, didSlideToState state: SlidingSideViewState) {
         print("Did slide")
     }
 }

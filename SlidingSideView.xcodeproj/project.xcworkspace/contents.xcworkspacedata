@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:SlidingDetailView.xcodeproj">
+      location = "self:/Users/kacperraczy/Documents/Developer/SlidingDetailView/SlidingSideView.xcodeproj">
    </FileRef>
 </Workspace>

@@ -1,6 +1,6 @@
 //
-//  SlidingDetailView.swift
-//  SlidingDetailView
+//  SlidingSideView.swift
+//  SlidingSideView
 //
 //  Created by Kacper Raczy on 23.07.2017.
 //  Copyright © 2017 Kacper Raczy. All rights reserved.
@@ -10,20 +10,20 @@ import UIKit
 
 //MARK: Enums
 
-public enum SlidingDetailViewState {
+public enum SlidingSideViewState {
     case normal
     case expanded
     case collapsed
 }
 
-public enum SlidingDetailViewAnchor {
+public enum SlidingSideViewAnchor {
     case bottom
     case top
     case right
     case left
 }
 
-public class SlidingDetailView: UIView {
+public class SlidingSideView: UIView {
     
     //MARK: Properties
     
@@ -31,13 +31,13 @@ public class SlidingDetailView: UIView {
     
     private var _expandedHeight: CGFloat?
     
-    private var _anchor: SlidingDetailViewAnchor!
+    private var _anchor: SlidingSideViewAnchor!
     
-    private var _currentSDVState: SlidingDetailViewState = .collapsed
+    private var _currentSDVState: SlidingSideViewState = .collapsed
     
     private var _animationDuration: Double = 0.3
 
-    private var _delegate: SlidingDetailViewDelegate?
+    private var _delegate: SlidingSideViewDelegate?
     
     //is overwritten
     private var shouldInvertAnchorConstant: Bool
@@ -63,7 +63,7 @@ public class SlidingDetailView: UIView {
     
     //MARK: Initialization
     
-    public init(_ anchor: SlidingDetailViewAnchor, withNormalHeight normal: CGFloat, expandedHeight expanded: CGFloat?) {
+    public init(_ anchor: SlidingSideViewAnchor, withNormalHeight normal: CGFloat, expandedHeight expanded: CGFloat?) {
         
         self._normalHeight = normal
         self._expandedHeight = expanded
@@ -79,7 +79,7 @@ public class SlidingDetailView: UIView {
         super.init(frame: CGRect.zero)
     }
     
-    public convenience init(_ anchor: SlidingDetailViewAnchor, withNormalHeight normal: CGFloat) {
+    public convenience init(_ anchor: SlidingSideViewAnchor, withNormalHeight normal: CGFloat) {
         self.init(anchor, withNormalHeight: normal, expandedHeight: nil)
     }
     
@@ -96,7 +96,7 @@ public class SlidingDetailView: UIView {
         configureConstraints(superView: v)
     }
     
-    private func checkAnchorInvertionStatus(forAnchor anchor: SlidingDetailViewAnchor) -> Bool {
+    private func checkAnchorInvertionStatus(forAnchor anchor: SlidingSideViewAnchor) -> Bool {
         switch anchor {
         case .top, .left:
             return true
@@ -127,7 +127,7 @@ public class SlidingDetailView: UIView {
         }
     }
     
-    public var currentState: SlidingDetailViewState {
+    public var currentState: SlidingSideViewState {
         get {
             return _currentSDVState
         }
@@ -147,13 +147,13 @@ public class SlidingDetailView: UIView {
         }
     }
     
-    public var anchor: SlidingDetailViewAnchor {
+    public var anchor: SlidingSideViewAnchor {
         get {
             return _anchor
         }
     }
     
-    public var delegate: SlidingDetailViewDelegate? {
+    public var delegate: SlidingSideViewDelegate? {
         get{
             return _delegate
         }
@@ -258,7 +258,7 @@ public class SlidingDetailView: UIView {
         return supportConstraints
     }
     
-    private func getAssiociatedLayoutAttribute(anchor: SlidingDetailViewAnchor) -> NSLayoutAttribute {
+    private func getAssiociatedLayoutAttribute(anchor: SlidingSideViewAnchor) -> NSLayoutAttribute {
         switch anchor {
         case .top:
             return NSLayoutAttribute.top
@@ -286,7 +286,7 @@ public class SlidingDetailView: UIView {
         }
     }
     
-    private func setCurrentStateConstraints(state: SlidingDetailViewState) {
+    private func setCurrentStateConstraints(state: SlidingSideViewState) {
         switch state {
         case .normal:
             sdv_sizeConstraint.constant = self._normalHeight
