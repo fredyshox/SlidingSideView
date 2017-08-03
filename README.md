@@ -1,6 +1,6 @@
 # SlidingSideView
 
-Tool for dislaying any kind of side views by sliding them out of the edge of the screen written in Swift 3. It supports every screen egde(left, right, top and bottom) handle the presentation programmaticaly.
+Tool for displaying any kind of side views by sliding them out of the edge of the screen written in Swift 3. It supports every screen egde(left, right, top and bottom) handle the presentation programmaticaly.
 
 To use it, you have to provide your own view or view controllers view that you want to display and embed it in `SlidingSideView`. 
 
