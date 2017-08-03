@@ -15,10 +15,7 @@
 		E280407C1F26844500201497 /* SlidingDetailView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2B94BD51F240BD20060C9B9 /* SlidingDetailView.framework */; };
 		E280407D1F26844500201497 /* SlidingDetailView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E2B94BD51F240BD20060C9B9 /* SlidingDetailView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E28040851F26870000201497 /* SlidingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B94BEF1F240C130060C9B9 /* SlidingDetailView.swift */; };
-		E28040871F27EC6200201497 /* SlidingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28040861F27EC6200201497 /* SlidingDetailViewController.swift */; };
-		E28040891F27ECCE00201497 /* SlidingDetailAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28040881F27ECCE00201497 /* SlidingDetailAnimationController.swift */; };
 		E280408A1F27F29F00201497 /* SlidingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B94BEF1F240C130060C9B9 /* SlidingDetailView.swift */; };
-		E280408B1F27F2A300201497 /* SlidingDetailAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28040881F27ECCE00201497 /* SlidingDetailAnimationController.swift */; };
 		E280408D1F28F3C300201497 /* AnchorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280408C1F28F3C300201497 /* AnchorTableViewController.swift */; };
 		E280408F1F29509300201497 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280408E1F29509300201497 /* Extensions.swift */; };
 		E28040911F2BE9A900201497 /* SlidingDetailViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28040901F2BE9A900201497 /* SlidingDetailViewDelegate.swift */; };
@@ -68,8 +65,6 @@
 		E28040731F26839800201497 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E28040761F26839800201497 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E28040781F26839800201497 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E28040861F27EC6200201497 /* SlidingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingDetailViewController.swift; sourceTree = "<group>"; };
-		E28040881F27ECCE00201497 /* SlidingDetailAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingDetailAnimationController.swift; sourceTree = "<group>"; };
 		E280408C1F28F3C300201497 /* AnchorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnchorTableViewController.swift; sourceTree = "<group>"; };
 		E280408E1F29509300201497 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		E28040901F2BE9A900201497 /* SlidingDetailViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingDetailViewDelegate.swift; sourceTree = "<group>"; };
@@ -151,8 +146,6 @@
 				E2B94BD91F240BD20060C9B9 /* Info.plist */,
 				E2B94BEF1F240C130060C9B9 /* SlidingDetailView.swift */,
 				E28040901F2BE9A900201497 /* SlidingDetailViewDelegate.swift */,
-				E28040861F27EC6200201497 /* SlidingDetailViewController.swift */,
-				E28040881F27ECCE00201497 /* SlidingDetailAnimationController.swift */,
 				E280408E1F29509300201497 /* Extensions.swift */,
 				E28040921F2BEBDE00201497 /* TODO.swift */,
 			);
@@ -321,7 +314,6 @@
 				E280408D1F28F3C300201497 /* AnchorTableViewController.swift in Sources */,
 				E280406F1F26839800201497 /* DemoViewController.swift in Sources */,
 				E28040941F3282A500201497 /* SlidingDetailViewDelegate.swift in Sources */,
-				E280408B1F27F2A300201497 /* SlidingDetailAnimationController.swift in Sources */,
 				E280406D1F26839800201497 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,8 +323,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E280408A1F27F29F00201497 /* SlidingDetailView.swift in Sources */,
-				E28040871F27EC6200201497 /* SlidingDetailViewController.swift in Sources */,
-				E28040891F27ECCE00201497 /* SlidingDetailAnimationController.swift in Sources */,
 				E280408F1F29509300201497 /* Extensions.swift in Sources */,
 				E28040911F2BE9A900201497 /* SlidingDetailViewDelegate.swift in Sources */,
 				E28040931F2BEBDE00201497 /* TODO.swift in Sources */,
