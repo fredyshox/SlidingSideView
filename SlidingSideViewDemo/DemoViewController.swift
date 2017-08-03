@@ -11,7 +11,7 @@ import SlidingSideView
 
 class DemoViewController: UIViewController {
 
-    var slidingDetailView: SlidingSideView!
+    var slidingSideView: SlidingSideView!
     var slidingDetailAnchor: SlidingSideViewAnchor!
     var label: UILabel!
     
@@ -26,15 +26,15 @@ class DemoViewController: UIViewController {
         setupToolbar()
         setupSlideImage()
         
-        slidingDetailView = SlidingSideView(slidingDetailAnchor ,withNormalHeight: 100.0, expandedHeight: 200.0)
-        slidingDetailView.backgroundColor = UIColor.clear
-        slidingDetailView.delegate = self
+        slidingSideView = SlidingSideView(slidingDetailAnchor ,withNormalHeight: 100.0, expandedHeight: 200.0)
+        slidingSideView.backgroundColor = UIColor.clear
+        slidingSideView.delegate = self
         
         //set layoutguides before adding as a subview
-        slidingDetailView.topLayouyGuide = self.topLayoutGuide
-        slidingDetailView.bottomLayoutGuide = self.bottomLayoutGuide
+        slidingSideView.topLayouyGuide = self.topLayoutGuide
+        slidingSideView.bottomLayoutGuide = self.bottomLayoutGuide
         
-        self.view.addSubview(slidingDetailView)
+        self.view.addSubview(slidingSideView)
         
         let contentView = UIView()
         contentView.backgroundColor = UIColor(red: 0.0, green: 129.0/255.0, blue: 213.0/255.0, alpha: 1.0)
@@ -53,31 +53,31 @@ class DemoViewController: UIViewController {
         let labelTrailing = label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0.0)
         NSLayoutConstraint.activate([labelCenter,labelLeading,labelTrailing])
         
-        slidingDetailView.addSubview(contentView)
+        slidingSideView.addSubview(contentView)
         configureViewLayout(view: contentView)
     
     }
     
     func normalSlide(_ sender: Any) {
-        slidingDetailView.currentState = .normal
-        label.text = String(format: "State: Normal, Height: %g", slidingDetailView.normalHeight)
+        slidingSideView.currentState = .normal
+        label.text = String(format: "State: Normal, Height: %g", slidingSideView.normalHeight)
     }
 
     func extendedSlide(_ sender: Any) {
-        slidingDetailView.currentState = .expanded
-        label.text = String(format: "State: Expanded, Height: %g", slidingDetailView.expandedHeight!)
+        slidingSideView.currentState = .expanded
+        label.text = String(format: "State: Expanded, Height: %g", slidingSideView.expandedHeight!)
     }
     
     func close(_ sender: Any) {
-        slidingDetailView.currentState = .collapsed
+        slidingSideView.currentState = .collapsed
         label.text = "State: Collapsed"
     }
     
     func configureViewLayout(view: UIView) {
-        let top = view.topAnchor.constraint(equalTo: self.slidingDetailView.topAnchor, constant: 0.0)
-        let bottom = view.bottomAnchor.constraint(equalTo: self.slidingDetailView.bottomAnchor, constant: 0.0)
-        let leading = view.leadingAnchor.constraint(equalTo: self.slidingDetailView.leadingAnchor, constant: 0.0)
-        let trailing = view.trailingAnchor.constraint(equalTo: self.slidingDetailView.trailingAnchor, constant: 0.0)
+        let top = view.topAnchor.constraint(equalTo: self.slidingSideView.topAnchor, constant: 0.0)
+        let bottom = view.bottomAnchor.constraint(equalTo: self.slidingSideView.bottomAnchor, constant: 0.0)
+        let leading = view.leadingAnchor.constraint(equalTo: self.slidingSideView.leadingAnchor, constant: 0.0)
+        let trailing = view.trailingAnchor.constraint(equalTo: self.slidingSideView.trailingAnchor, constant: 0.0)
         NSLayoutConstraint.activate([top,bottom,leading,trailing])
     }
     
@@ -108,11 +108,11 @@ class DemoViewController: UIViewController {
 
 extension DemoViewController: SlidingSideViewDelegate {
     
-    public func slidingDetailView(_ sdView: SlidingSideView, willSlideToState state: SlidingSideViewState) {
+    public func slidingSideView(_ sdView: SlidingSideView, willSlideToState state: SlidingSideViewState) {
         print("Will slide")
     }
     
-    func slidingDetailView(_ sdView: SlidingSideView, didSlideToState state: SlidingSideViewState) {
+    func slidingSideView(_ sdView: SlidingSideView, didSlideToState state: SlidingSideViewState) {
         print("Did slide")
     }
 }
