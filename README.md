@@ -22,16 +22,16 @@ Cocoapods support is not available, but it's coming soon.
 
 Firstly we have to initialize SlidingSideView instance. It supports every edge of its container which you can specify by passing `SlidingSideViewAnchor` enum instance which can be `.top` , `.bottom`, `.right`, `.left`.
 
-You also have to pass appropriate height `CGFloat` values, for standard height and expanded(optional) height. This are height values for view when being slided out.
+You also have to pass appropriate height `CGFloat` values, for standard(normal) height and expanded(optional) height. This are height values for view when being slided out.
 
 ```swift
     import SlidingSideView
 
     ...
 
-    let normalHeight = 100.0  // 
+    let normalHeight = 100.0 
     let expandedHeigth = 200.0
-    let slidingSideView = SlidingSideView(.bottom ,withNormalHeight: 100.0, expandedHeight: 200.0)
+    let slidingSideView = SlidingSideView(.bottom ,withNormalHeight: normalHeight, expandedHeight: expandedHeight)
 ```
 Then just add it as subview. SlidingSideView will now create relevant constraints and it will be ready to use!
 
