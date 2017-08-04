@@ -1,8 +1,8 @@
 # SlidingSideView
 
-Tool for displaying any kind of side views by sliding them out of the edge of the screen written in Swift 3. It supports every screen egde(left, right, top and bottom) handle the presentation programmaticaly.
+Tool for displaying any kind of side views by sliding them out of the edge of the screen, written in Swift 3. It supports every screen egde(left, right, top and bottom)and handles the presentation programmaticaly.
 
-To use it, you have to provide your own view or view controllers view that you want to display and embed it in `SlidingSideView`. 
+To use it, you have to provide your own view or view controller's view that you want to display and embed it in `SlidingSideView`. 
 
 It can be treated as a regular `UIView` subclass, and be embedded in regular `UIView` to achieve similar effects in different contexts.
 
@@ -22,7 +22,7 @@ Cocoapods support is not available, but it's coming soon.
 
 Firstly we have to initialize SlidingSideView instance. It supports every edge of its container which you can specify by passing `SlidingSideViewAnchor` enum instance which can be `.top` , `.bottom`, `.right`, `.left`.
 
-You also have to pass appropriate height `CGFloat` values, for standard(normal) height and expanded(optional) height. This are height values for view when being slided out.
+You also have to pass appropriate height `CGFloat` values, for standard(normal) height and expanded(optional) height. These are height values for view when being slided out.
 
 ```swift
     import SlidingSideView
@@ -52,7 +52,9 @@ To slide the view out just set `currentState` property. The SlidingSideView will
 ### Layout relative to ViewController's layoutGuides
 
 SlidingSideView can be positioned with respect to viewController layoutGuides. To do this you have to set its `topLayoutGuide` of `bottomLayoutGuide` properties to proper ViewController's ones.
-Note that it should be done before adding SlidingSideView as a subview. It's especially helpful when using `UINavigationController`, `UITabBarController` or just status bar.
+Note that it should be done before adding SlidingSideView as a subview. 
+
+It's especially helpful when using `UINavigationController`, `UITabBarController` or just status bar.
 
 ```swift
     slidingSideView.topLayouyGuide = self.topLayoutGuide
