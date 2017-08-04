@@ -10,5 +10,5 @@
 
 //TODO animationDefaultOptions: springEffect, uiViewAnimateOptions, animationDuration
 //TODO gestureRecognizers: panGR, springEffectOnMaximumHeight
-//TODO delegate protocol and methods
+//TODO container view controller with several sliding side views
 //TODO fullscreen mode

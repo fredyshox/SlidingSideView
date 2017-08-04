@@ -10,11 +10,25 @@ import UIKit
 
 //MARK: Enums
 
+/**
+ Represents the slide state values of the `SlidingSideView`.
+ 
+ Possible values: `.collapsed`, `.normal`, `.expanded`.
+ */
 public enum SlidingSideViewState {
     case normal
     case expanded
     case collapsed
 }
+
+/**
+ The anchor of the `SlidingSideView` which corresponds to the edge of the container
+ (or screen if set as `UIViewController`'s view subview).
+ 
+ The anchor decides of the position of the view and direction of the slide effect.
+ 
+ Possible values: `.top`, `.bottom`, `.right`, `.left`.
+ */
 
 public enum SlidingSideViewAnchor {
     case bottom
@@ -22,6 +36,22 @@ public enum SlidingSideViewAnchor {
     case right
     case left
 }
+
+/**
+ The `SlidingSideView` is main class in the framework. This `UIVIew` subclass 
+ controls the presentation of your content.
+ 
+ The `SlidingSideView` uses constraints with superview to position itseft behind 
+ chosen edge(anchor) and animates sliding by managing them. The sliding can be controlled
+ programmaticaly by setting sliding state(`currentState`) which causes view to change 
+ height and slide out.
+
+ 
+ It can be treated as a regular UIView subclass, and be embedded in regular UIView 
+ to achieve similar effects in different contexts.
+ 
+ You provide your own content to it by adding subviews (ex. child `UIViewController` views).
+ */
 
 public class SlidingSideView: UIView {
     
@@ -39,10 +69,17 @@ public class SlidingSideView: UIView {
 
     private var _delegate: SlidingSideViewDelegate?
     
-    //is overwritten
     private var shouldInvertAnchorConstant: Bool
     
-    //layout guides
+    // Layout guides
+    
+    /**
+     Set this property to your `UIViewController`'s `topLayoutGuide` if you want SlidingSideView layout to be relative to it.
+     
+     It's very helpful when using `UINavigationController` or status bar.
+     
+        - Precondition: topLayoutGuide must be set before adding view as a subview.
+     */
     
     public var topLayouyGuide: UILayoutSupport? {
         didSet{
@@ -52,6 +89,14 @@ public class SlidingSideView: UIView {
         }
     }
     
+    /**
+     Set this property to your `UIViewController`'s `bottomLayoutGuide` if you want SlidingSideView layout to be relative to it.
+     
+     It's very helpful when using `UITabBarController`.
+     
+     - Precondition: bottomLayoutGuide must be set before adding view as a subview.
+     */
+    
     public var bottomLayoutGuide: UILayoutSupport? {
         didSet{
             if superview != nil {
@@ -60,8 +105,36 @@ public class SlidingSideView: UIView {
         }
     }
     
-    
     //MARK: Initialization
+    
+    /**
+     Initializes new instance of `SlidingSideView` with given anchor and height for `.normal` state.
+     
+     When using this method, created instance has no height for `.expanded` state(It's nil). 
+     It will behave the same as for `.normal` when set to state `.expanded`.
+     
+        - parameter anchor: The anchor of created view, which corresponds to the edge of container
+                            that SlidingSideView will slide out from.
+        - parameter normal: The height for state `.normal`.
+     
+        - returns: An initialized `SlidingDetailView` object.
+     */
+    
+    public convenience init(_ anchor: SlidingSideViewAnchor, withNormalHeight normal: CGFloat) {
+        self.init(anchor, withNormalHeight: normal, expandedHeight: nil)
+    }
+    
+    /**
+     Initializes new instance of `SlidingSideView` with given anchor, height for `.normal` state
+     and height for `.expanded` state.
+     
+     - parameter anchor: The anchor of created view, which corresponds to the edge of container 
+                         that SlidingSideView will slide out from.
+     - parameter normal: The height for state `.normal`.
+     - parameter expanded: The optional height fot state `.expanded`.
+     
+     - returns: An initialized `SlidingDetailView` object.
+     */
     
     public init(_ anchor: SlidingSideViewAnchor, withNormalHeight normal: CGFloat, expandedHeight expanded: CGFloat?) {
         
@@ -79,13 +152,20 @@ public class SlidingSideView: UIView {
         super.init(frame: CGRect.zero)
     }
     
-    public convenience init(_ anchor: SlidingSideViewAnchor, withNormalHeight normal: CGFloat) {
-        self.init(anchor, withNormalHeight: normal, expandedHeight: nil)
-    }
+    /**
+     - Attention: This initializer hasn't been implemented yet. Will throw fatal error.
+     */
     
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    /**
+     Tells the view that its superview changed. 
+     
+     When given superview, sliding side view will configure specific constraints 
+     with parent view depending on `anchor` and heights.
+     */
     
     public override func didMoveToSuperview() {
         super.didMoveToSuperview()
@@ -96,16 +176,12 @@ public class SlidingSideView: UIView {
         configureConstraints(superView: v)
     }
     
-    private func checkAnchorInvertionStatus(forAnchor anchor: SlidingSideViewAnchor) -> Bool {
-        switch anchor {
-        case .top, .left:
-            return true
-        case .bottom, .right :
-            return false
-        }
-    }
-    
     //MARK: Getters and Setters
+    
+    
+    /**
+     The view height for slide state `.normal`.
+     */
     
     public var normalHeight: CGFloat {
         get{
@@ -117,6 +193,12 @@ public class SlidingSideView: UIView {
         }
     }
     
+    /**
+     The view height for slide state `.expanded`.
+     
+     It's nil by default, and then view is using `normalHeight` fot state `.expanded`.
+     */
+    
     public var expandedHeight: CGFloat? {
         get{
             return _expandedHeight
@@ -126,6 +208,16 @@ public class SlidingSideView: UIView {
             setCurrentStateConstraints(state: _currentSDVState)
         }
     }
+    
+    /**
+     The current slide state of the sliding side view. 
+     
+     When set, the view will adjust the visibility and height for:
+     not visible for `.collapsed`, visible with `normalHeight` for `.normal`, visible with `expandedHeight` 
+     for `.expanded(or the same as normal if expandedHeight is nil). 
+     
+     The change will be animated with sliding out effect.
+     */
     
     public var currentState: SlidingSideViewState {
         get {
@@ -138,14 +230,13 @@ public class SlidingSideView: UIView {
         }
     }
     
-    public var slideDuration: Double {
-        get {
-            return _animationDuration
-        }
-        set{
-            _animationDuration = newValue
-        }
-    }
+    /**
+     The anchor of the SlidingSideView which corresponds to the edge of the container
+     (or screen if set as `UIViewController`'s view subview).
+     
+     If you want SlidingSideView to be layout with respect to `UINavigationBar` or 
+     `UITabBar` etc. see `topLayoutGuide` and `bottomLayoutGuide` properties.
+     */
     
     public var anchor: SlidingSideViewAnchor {
         get {
@@ -153,12 +244,33 @@ public class SlidingSideView: UIView {
         }
     }
     
+    /**
+     The object that acts as a delegate of the sliding side view.
+     
+     The delegate must adopt `SlidingSideViewDelegate` protocol.
+     */
+    
     public var delegate: SlidingSideViewDelegate? {
         get{
             return _delegate
         }
         set{
             _delegate = newValue
+        }
+    }
+    
+    // Animation options
+    
+    /**
+     The duration of slide animation in seconds. Set this to customize slide animation.
+     */
+    
+    public var slideDuration: Double {
+        get {
+            return _animationDuration
+        }
+        set{
+            _animationDuration = newValue
         }
     }
     
@@ -268,6 +380,15 @@ public class SlidingSideView: UIView {
             return NSLayoutAttribute.left
         case .right:
             return NSLayoutAttribute.right
+        }
+    }
+    
+    private func checkAnchorInvertionStatus(forAnchor anchor: SlidingSideViewAnchor) -> Bool {
+        switch anchor {
+        case .top, .left:
+            return true
+        case .bottom, .right :
+            return false
         }
     }
     

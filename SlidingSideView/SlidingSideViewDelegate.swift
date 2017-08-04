@@ -8,6 +8,10 @@
 
 import Foundation
 
+/**
+ The delegate of `SlidingSideView` is used to inform delegate object about the changes of
+ sliding side view state that the view is undergoing.
+ */
 
 public protocol SlidingSideViewDelegate {
     func slidingDetailView(_ sdView: SlidingSideView, willSlideToState state: SlidingSideViewState);
