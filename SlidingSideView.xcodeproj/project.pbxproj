@@ -16,13 +16,13 @@
 		E280406F1F26839800201497 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280406E1F26839800201497 /* DemoViewController.swift */; };
 		E28040721F26839800201497 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E28040701F26839800201497 /* Main.storyboard */; };
 		E28040771F26839800201497 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E28040751F26839800201497 /* LaunchScreen.storyboard */; };
-		E28040851F26870000201497 /* SlidingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B94BEF1F240C130060C9B9 /* SlidingDetailView.swift */; };
-		E280408A1F27F29F00201497 /* SlidingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B94BEF1F240C130060C9B9 /* SlidingDetailView.swift */; };
+		E28040851F26870000201497 /* SlidingSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B94BEF1F240C130060C9B9 /* SlidingSideView.swift */; };
+		E280408A1F27F29F00201497 /* SlidingSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B94BEF1F240C130060C9B9 /* SlidingSideView.swift */; };
 		E280408D1F28F3C300201497 /* AnchorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280408C1F28F3C300201497 /* AnchorTableViewController.swift */; };
 		E280408F1F29509300201497 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280408E1F29509300201497 /* Extensions.swift */; };
-		E28040911F2BE9A900201497 /* SlidingDetailViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28040901F2BE9A900201497 /* SlidingDetailViewDelegate.swift */; };
+		E28040911F2BE9A900201497 /* SlidingSideViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28040901F2BE9A900201497 /* SlidingSideViewDelegate.swift */; };
 		E28040931F2BEBDE00201497 /* TODO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28040921F2BEBDE00201497 /* TODO.swift */; };
-		E28040941F3282A500201497 /* SlidingDetailViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28040901F2BE9A900201497 /* SlidingDetailViewDelegate.swift */; };
+		E28040941F3282A500201497 /* SlidingSideViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28040901F2BE9A900201497 /* SlidingSideViewDelegate.swift */; };
 		E2B002341F33E362002FB6F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2B002331F33E362002FB6F5 /* UIKit.framework */; };
 		E2B94BE61F240BD20060C9B9 /* SlidingSideView.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B94BD81F240BD20060C9B9 /* SlidingSideView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -71,13 +71,13 @@
 		E28040781F26839800201497 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E280408C1F28F3C300201497 /* AnchorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnchorTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E280408E1F29509300201497 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Extensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		E28040901F2BE9A900201497 /* SlidingDetailViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingDetailViewDelegate.swift; sourceTree = "<group>"; };
+		E28040901F2BE9A900201497 /* SlidingSideViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingSideViewDelegate.swift; sourceTree = "<group>"; };
 		E28040921F2BEBDE00201497 /* TODO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TODO.swift; sourceTree = "<group>"; };
 		E2B002331F33E362002FB6F5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E2B94BD51F240BD20060C9B9 /* SlidingSideView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SlidingSideView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2B94BD81F240BD20060C9B9 /* SlidingSideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidingSideView.h; sourceTree = "<group>"; };
 		E2B94BD91F240BD20060C9B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E2B94BEF1F240C130060C9B9 /* SlidingDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SlidingDetailView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		E2B94BEF1F240C130060C9B9 /* SlidingSideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SlidingSideView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,8 +165,8 @@
 			children = (
 				E2B94BD81F240BD20060C9B9 /* SlidingSideView.h */,
 				E2B94BD91F240BD20060C9B9 /* Info.plist */,
-				E2B94BEF1F240C130060C9B9 /* SlidingDetailView.swift */,
-				E28040901F2BE9A900201497 /* SlidingDetailViewDelegate.swift */,
+				E2B94BEF1F240C130060C9B9 /* SlidingSideView.swift */,
+				E28040901F2BE9A900201497 /* SlidingSideViewDelegate.swift */,
 				E280408E1F29509300201497 /* Extensions.swift */,
 				E28040921F2BEBDE00201497 /* TODO.swift */,
 			);
@@ -330,10 +330,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E28040851F26870000201497 /* SlidingDetailView.swift in Sources */,
+				E28040851F26870000201497 /* SlidingSideView.swift in Sources */,
 				E280408D1F28F3C300201497 /* AnchorTableViewController.swift in Sources */,
 				E280406F1F26839800201497 /* DemoViewController.swift in Sources */,
-				E28040941F3282A500201497 /* SlidingDetailViewDelegate.swift in Sources */,
+				E28040941F3282A500201497 /* SlidingSideViewDelegate.swift in Sources */,
 				E280406D1F26839800201497 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,9 +342,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E280408A1F27F29F00201497 /* SlidingDetailView.swift in Sources */,
+				E280408A1F27F29F00201497 /* SlidingSideView.swift in Sources */,
 				E280408F1F29509300201497 /* Extensions.swift in Sources */,
-				E28040911F2BE9A900201497 /* SlidingDetailViewDelegate.swift in Sources */,
+				E28040911F2BE9A900201497 /* SlidingSideViewDelegate.swift in Sources */,
 				E28040931F2BEBDE00201497 /* TODO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
