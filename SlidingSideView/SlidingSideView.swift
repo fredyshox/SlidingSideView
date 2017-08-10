@@ -69,6 +69,8 @@ public class SlidingSideView: UIView {
 
     private var _delegate: SlidingSideViewDelegate?
     
+    private var _isHeightStatic: Bool = false
+    
     private var shouldInvertAnchorConstant: Bool
     
     // Layout guides
