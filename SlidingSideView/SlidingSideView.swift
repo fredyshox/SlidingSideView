@@ -69,6 +69,8 @@ public class SlidingSideView: UIView {
 
     private var _delegate: SlidingSideViewDelegate?
     
+    private var _isHeightStatic: Bool = false
+    
     private var shouldInvertAnchorConstant: Bool
     
     // Layout guides
@@ -259,6 +261,15 @@ public class SlidingSideView: UIView {
         }
     }
     
+    public var isHeightStatic: Bool {
+        get{
+            return _isHeightStatic
+        }
+        set{
+            _isHeightStatic = newValue
+        }
+    }
+    
     // Animation options
     
     /**
@@ -410,19 +421,80 @@ public class SlidingSideView: UIView {
     private func setCurrentStateConstraints(state: SlidingSideViewState) {
         switch state {
         case .normal:
-            sdv_sizeConstraint.constant = self._normalHeight
-            sdv_anchorConstraint.constant = 0.0
-        case .collapsed:
-            sdv_sizeConstraint.constant = self._normalHeight
-            if shouldInvertAnchorConstant {
-                sdv_anchorConstraint.constant = self._normalHeight * (-1)
+            if _isHeightStatic {
+                let staticHeight:CGFloat = self._expandedHeight ?? self._normalHeight
+                sdv_sizeConstraint.constant = staticHeight
+                if shouldInvertAnchorConstant {
+                    sdv_anchorConstraint.constant = (-1)*(staticHeight-self._normalHeight)
+                }else {
+                    sdv_anchorConstraint.constant = (staticHeight-self._normalHeight)
+                }
             }else {
-                sdv_anchorConstraint.constant = self._normalHeight
+                sdv_sizeConstraint.constant = self._normalHeight
+                sdv_anchorConstraint.constant = 0.0
+            }
+        case .collapsed:
+            if _isHeightStatic {
+                let staticHeight: CGFloat = self._expandedHeight ?? self._normalHeight
+                sdv_sizeConstraint.constant = staticHeight
+                if shouldInvertAnchorConstant {
+                    sdv_anchorConstraint.constant = staticHeight * (-1)
+                }else {
+                    sdv_anchorConstraint.constant = staticHeight
+                }
+            }else {
+                sdv_sizeConstraint.constant = self._normalHeight
+                if shouldInvertAnchorConstant {
+                    sdv_anchorConstraint.constant = self._normalHeight * (-1)
+                }else {
+                    sdv_anchorConstraint.constant = self._normalHeight
+                }
             }
         case .expanded:
             sdv_sizeConstraint.constant = self._expandedHeight ?? self._normalHeight
             sdv_anchorConstraint.constant = 0.0
         }
+    }
+    
+    //MARK: Static
+    public static func topContainerView(parentVC: UIViewController, childVC: UIViewController, normalHeight: CGFloat, expandedHeight: CGFloat?) -> SlidingSideView{
+        return containerView(parentVC: parentVC, childVC: childVC, anchor: .top, normalHeight: normalHeight, expandedHeight: expandedHeight, layoutGuidesRelative: false)
+    }
+    
+    public static func bottomContainerView(parentVC: UIViewController, childVC: UIViewController, normalHeight: CGFloat, expandedHeight: CGFloat?) -> SlidingSideView {
+        return containerView(parentVC: parentVC, childVC: childVC, anchor: .bottom, normalHeight: normalHeight, expandedHeight: expandedHeight, layoutGuidesRelative: false)
+    }
+    
+    public static func rightContainerView(parentVC: UIViewController, childVC: UIViewController, normalHeight: CGFloat, expandedHeight: CGFloat?) -> SlidingSideView{
+        return containerView(parentVC: parentVC, childVC: childVC, anchor: .right, normalHeight: normalHeight, expandedHeight: expandedHeight, layoutGuidesRelative: false)
+    }
+    
+    public static func leftContainerView(parentVC: UIViewController, childVC: UIViewController, normalHeight: CGFloat, expandedHeight: CGFloat?) -> SlidingSideView{
+        return containerView(parentVC: parentVC, childVC: childVC, anchor: .left, normalHeight: normalHeight, expandedHeight: expandedHeight, layoutGuidesRelative: false)
+    }
+    
+    public static func containerView(parentVC: UIViewController ,childVC viewController: UIViewController, anchor: SlidingSideViewAnchor, normalHeight: CGFloat, expandedHeight: CGFloat?, layoutGuidesRelative: Bool) -> SlidingSideView {
+        let slidingView = SlidingSideView(anchor, withNormalHeight: normalHeight, expandedHeight: expandedHeight)
+        
+        parentVC.addChildViewController(viewController)
+        viewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        if layoutGuidesRelative{
+            slidingView.topLayouyGuide = parentVC.topLayoutGuide
+            slidingView.bottomLayoutGuide = parentVC.bottomLayoutGuide
+        }
+        
+        slidingView.addSubview(viewController.view)
+        
+        let top = NSLayoutConstraint(item: viewController.view, attribute: .top, relatedBy: .equal, toItem: slidingView, attribute: .top, multiplier: 1.0, constant: 0.0)
+        let bottom = NSLayoutConstraint(item: viewController.view, attribute: .bottom, relatedBy: .equal, toItem: slidingView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+        let left = NSLayoutConstraint(item: viewController.view, attribute: .left, relatedBy: .equal, toItem: slidingView, attribute: .left, multiplier: 1.0, constant: 0.0)
+        let right = NSLayoutConstraint(item: viewController.view, attribute: .right, relatedBy: .equal, toItem: slidingView, attribute: .right, multiplier: 1.0, constant: 0.0)
+        NSLayoutConstraint.activate([top,bottom,left,right])
+        
+        viewController.didMove(toParentViewController: parentVC)
+        
+        return slidingView
     }
 
 }

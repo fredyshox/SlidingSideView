@@ -13,21 +13,11 @@
         <!--Anchor Table View Controller-->
         <scene sceneID="vp3-Uk-dPN">
             <objects>
-                <tableViewController id="y6Y-5d-DBd" customClass="AnchorTableViewController" customModule="SlidingDetailViewDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="anchorVC" id="y6Y-5d-DBd" customClass="AnchorTableViewController" customModule="SlidingSideViewDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="5O4-Gy-UXH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="fMP-5I-Dnp">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fMP-5I-Dnp" id="Xfx-Ge-sJ1">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="y6Y-5d-DBd" id="Z7H-Am-NhN"/>
                             <outlet property="delegate" destination="y6Y-5d-DBd" id="Ft5-9B-ygI"/>
@@ -45,7 +35,7 @@
         <!--Demo View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="demoVC" id="BYZ-38-t0r" customClass="DemoViewController" customModule="SlidingDetailViewDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="demoVC" id="BYZ-38-t0r" customClass="DemoViewController" customModule="SlidingSideViewDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
