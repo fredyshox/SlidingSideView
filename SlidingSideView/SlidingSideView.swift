@@ -261,6 +261,15 @@ public class SlidingSideView: UIView {
         }
     }
     
+    public var isHeightStatic: Bool {
+        get{
+            return _isHeightStatic
+        }
+        set{
+            _isHeightStatic = newValue
+        }
+    }
+    
     // Animation options
     
     /**
@@ -412,14 +421,34 @@ public class SlidingSideView: UIView {
     private func setCurrentStateConstraints(state: SlidingSideViewState) {
         switch state {
         case .normal:
-            sdv_sizeConstraint.constant = self._normalHeight
-            sdv_anchorConstraint.constant = 0.0
-        case .collapsed:
-            sdv_sizeConstraint.constant = self._normalHeight
-            if shouldInvertAnchorConstant {
-                sdv_anchorConstraint.constant = self._normalHeight * (-1)
+            if _isHeightStatic {
+                let staticHeight:CGFloat = self._expandedHeight ?? self._normalHeight
+                sdv_sizeConstraint.constant = staticHeight
+                if shouldInvertAnchorConstant {
+                    sdv_anchorConstraint.constant = (-1)*(staticHeight-self._normalHeight)
+                }else {
+                    sdv_anchorConstraint.constant = (staticHeight-self._normalHeight)
+                }
             }else {
-                sdv_anchorConstraint.constant = self._normalHeight
+                sdv_sizeConstraint.constant = self._normalHeight
+                sdv_anchorConstraint.constant = 0.0
+            }
+        case .collapsed:
+            if _isHeightStatic {
+                let staticHeight: CGFloat = self._expandedHeight ?? self._normalHeight
+                sdv_sizeConstraint.constant = staticHeight
+                if shouldInvertAnchorConstant {
+                    sdv_anchorConstraint.constant = staticHeight * (-1)
+                }else {
+                    sdv_anchorConstraint.constant = staticHeight
+                }
+            }else {
+                sdv_sizeConstraint.constant = self._normalHeight
+                if shouldInvertAnchorConstant {
+                    sdv_anchorConstraint.constant = self._normalHeight * (-1)
+                }else {
+                    sdv_anchorConstraint.constant = self._normalHeight
+                }
             }
         case .expanded:
             sdv_sizeConstraint.constant = self._expandedHeight ?? self._normalHeight
