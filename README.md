@@ -14,9 +14,16 @@ It can be treated as a regular `UIView` subclass, and be embedded in regular `UI
 
 ## Installation
 
+### Manual install
 Download the latest version from the release section. Then copy SlidingSideView folder to your project.
 
-Cocoapods support is not available, but it's coming soon.
+### CocoaPods
+Add the following lines to your `Podfile`:
+```ruby
+use-frameworks!
+
+pod 'SlidingSideView', :git => 'https://github.com/fredyshox/SlidingSideView.git', :tag => '0.3.0'
+```
 
 ## Usage
 
