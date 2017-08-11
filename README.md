@@ -20,7 +20,7 @@ Download the latest version from the release section. Then copy SlidingSideView 
 ### CocoaPods
 Add the following lines to your `Podfile`:
 ```ruby
-use-frameworks!
+use_frameworks!
 
 pod 'SlidingSideView', :git => 'https://github.com/fredyshox/SlidingSideView.git', :tag => '0.3.0'
 ```
