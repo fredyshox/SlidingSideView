@@ -31,7 +31,7 @@ class DemoViewController: UIViewController {
         slidingSideView.delegate = self
         
         //set layoutguides before adding as a subview
-        slidingSideView.topLayouyGuide = self.topLayoutGuide
+        slidingSideView.topLayoutGuide = self.topLayoutGuide
         slidingSideView.bottomLayoutGuide = self.bottomLayoutGuide
         
         self.view.addSubview(slidingSideView)

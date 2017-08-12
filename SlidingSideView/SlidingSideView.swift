@@ -83,7 +83,7 @@ public class SlidingSideView: UIView {
         - Precondition: topLayoutGuide must be set before adding view as a subview.
      */
     
-    public var topLayouyGuide: UILayoutSupport? {
+    public var topLayoutGuide: UILayoutSupport? {
         didSet{
             if superview != nil {
                 configureConstraints(superView: superview!)
@@ -338,8 +338,8 @@ public class SlidingSideView: UIView {
                 anchorConstraint = NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: superView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
             }
         case .top:
-            if topLayouyGuide != nil {
-                anchorConstraint = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: topLayouyGuide!, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+            if topLayoutGuide != nil {
+                anchorConstraint = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: topLayoutGuide!, attribute: .bottom, multiplier: 1.0, constant: 0.0)
             }else {
                 anchorConstraint = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: superView, attribute: .top, multiplier: 1.0, constant: 0.0)
             }
@@ -359,7 +359,7 @@ public class SlidingSideView: UIView {
             let right = NSLayoutConstraint(item: self, attribute: .right, relatedBy: .equal, toItem: superView, attribute: .right, multiplier: 1.0, constant: 0.0)
             supportConstraints.append(contentsOf: [left,right])
         case .left, .right:
-            let topAnchorObject: Any? = topLayouyGuide
+            let topAnchorObject: Any? = topLayoutGuide
             let bottomAnchorObject: Any? = bottomLayoutGuide
             
             var top: NSLayoutConstraint!
@@ -480,7 +480,7 @@ public class SlidingSideView: UIView {
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
         
         if layoutGuidesRelative{
-            slidingView.topLayouyGuide = parentVC.topLayoutGuide
+            slidingView.topLayoutGuide = parentVC.topLayoutGuide
             slidingView.bottomLayoutGuide = parentVC.bottomLayoutGuide
         }
         
