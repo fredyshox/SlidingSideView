@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name         = 'SlidingSideView'
-    s.version      = '0.3.0'
+    s.version      = '0.3.1'
     s.license      = { :type => 'MIT', :file => 'LICENSE' }
     s.author       = { 'Kacper Raczy' => 'gfw.kra@gmail.com' }
     s.homepage     = 'https://github.com/fredyshox/SlidingSideView'
