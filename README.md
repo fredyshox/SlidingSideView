@@ -6,6 +6,8 @@ To use it, you have to provide your own view or view controller's view that you 
 
 It can be treated as a regular `UIView` subclass, and be embedded in regular `UIView` to achieve similar effects in different contexts.
 
+![](demo.gif)
+
 ## Requirements
 
 * iOS 8.0+
@@ -22,7 +24,7 @@ Add the following lines to your `Podfile`:
 ```ruby
 use_frameworks!
 
-pod 'SlidingSideView', :git => 'https://github.com/fredyshox/SlidingSideView.git', :tag => '0.3.0'
+pod 'SlidingSideView', :git => 'https://github.com/fredyshox/SlidingSideView.git', :tag => '0.3.1'
 ```
 
 ## Usage
@@ -64,7 +66,7 @@ Note that it should be done before adding SlidingSideView as a subview.
 It's especially helpful when using `UINavigationController`, `UITabBarController` or just status bar.
 
 ```swift
-    slidingSideView.topLayouyGuide = self.topLayoutGuide
+    slidingSideView.topLayoutGuide = self.topLayoutGuide
     slidingSideView.bottomLayoutGuide = self.bottomLayoutGuide
     ...
     //after setting layoutGuides add it as a subview
