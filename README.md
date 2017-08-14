@@ -6,6 +6,8 @@ To use it, you have to provide your own view or view controller's view that you 
 
 It can be treated as a regular `UIView` subclass, and be embedded in regular `UIView` to achieve similar effects in different contexts.
 
+![](demo.gif)
+
 ## Requirements
 
 * iOS 8.0+
